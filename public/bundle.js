@@ -9522,6 +9522,10 @@ var React = __webpack_require__(50);
 var GitHub = React.createClass({
     displayName: "GitHub",
 
+    handleSubmit: function (e) {
+        e.preventDefault();
+        console.log(this.refs.username.value);
+    },
     render: function () {
         return React.createElement(
             "div",
@@ -9539,7 +9543,7 @@ var GitHub = React.createClass({
                     { className: "row" },
                     React.createElement(
                         "form",
-                        null,
+                        { onSubmit: this.handleSubmit },
                         React.createElement(
                             "div",
                             { className: "form-group" },
@@ -9548,7 +9552,12 @@ var GitHub = React.createClass({
                                 null,
                                 "Username"
                             ),
-                            React.createElement("input", { type: "text", className: "form-control", placeholder: "Ex: marpriori" })
+                            React.createElement("input", {
+                                type: "text",
+                                ref: "username",
+                                className: "form-control",
+                                placeholder: "Ex: marpriori"
+                            })
                         ),
                         React.createElement(
                             "button",
