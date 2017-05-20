@@ -1,7 +1,7 @@
 module.exports = {
     entry: "./app/App.js",
     output: {
-        filename: "public/bundle.js"
+        filename: "docs/bundle.js"
     },
     module: {
         loaders: [
@@ -10,7 +10,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react','es2015']
+                    presets: ['react']
                 }
             }
         ]
