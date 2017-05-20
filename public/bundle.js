@@ -10202,25 +10202,51 @@ module.exports = getIteratorFn;
 
 /***/ }),
 /* 88 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var React = __webpack_require__(33);
-var SearchUser = __webpack_require__(109);
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SearchUser__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UserInfo__ = __webpack_require__(216);
 
-var GitHub = React.createClass({
-    displayName: 'GitHub',
 
 
-    render: function () {
-        return React.createElement(
+
+class GitHub extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: null,
+            repos: []
+        };
+    }
+
+    updateUser(user) {
+        this.setState({ user: user });
+    }
+
+    updateRepos(repos) {
+        this.setState({ repos: repos });
+    }
+
+    render() {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'container' },
-            React.createElement(SearchUser, null)
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__SearchUser__["a" /* default */], {
+                updateUser: this.updateUser.bind(this),
+                updateRepos: this.updateRepos.bind(this)
+            }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__UserInfo__["a" /* default */], {
+                user: this.state.user,
+                repos: this.state.repos
+            })
         );
     }
-});
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = GitHub;
 
-module.exports = GitHub;
 
 /***/ }),
 /* 89 */
@@ -11077,69 +11103,91 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 108 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var React = __webpack_require__(33);
-var ReactDOM = __webpack_require__(89);
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_GitHub__ = __webpack_require__(88);
 
-var GitHub = __webpack_require__(88);
 
-ReactDOM.render(React.createElement(GitHub, null), document.getElementById('app'));
+
+
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_GitHub__["a" /* default */], null), document.getElementById('app'));
 
 /***/ }),
 /* 109 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var React = __webpack_require__(33);
-var GitHubUser = __webpack_require__(110);
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__services_GitHubUser__);
 
-var SearchUser = React.createClass({
-    displayName: 'SearchUser',
 
-    handleSubmit: function (e) {
+
+class SearchUser extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: ''
+        };
+    }
+
+    handleUsernameChange(e) {
+        this.setState({ username: e.target.value });
+    }
+
+    handleSubmit(e) {
         e.preventDefault();
+        __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser___default.a.getByUsername(this.state.username).then(function (response) {
+            this.props.updateUser(response.data);
+        }.bind(this));
+        __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser___default.a.getReposByUsername(this.state.username).then(function (response) {
+            this.props.updateRepos(response.data);
+        }.bind(this));
+    }
 
-        GitHubUser.getByUsername(this.refs.username.value).then(function (response) {
-            console.log(response);
-        });
-        GitHubUser.getReposByUsername(this.refs.username.value).then(function (response) {
-            console.log(response);
-        });
-    },
-    render: function () {
-        return React.createElement(
+    render() {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'container' },
-            React.createElement(
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'jumbotron' },
-                React.createElement(
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'h1',
                     null,
                     'GitHub Info'
                 ),
-                React.createElement(
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'row' },
-                    React.createElement(
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'form',
-                        { onSubmit: this.handleSubmit },
-                        React.createElement(
+                        { onSubmit: this.handleSubmit.bind(this) },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'form-group' },
-                            React.createElement(
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'label',
                                 null,
                                 'Username'
                             ),
-                            React.createElement('input', {
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
                                 type: 'text',
-                                ref: 'username',
+                                value: this.state.username,
+                                onChange: this.handleUsernameChange.bind(this),
                                 className: 'form-control',
                                 placeholder: 'Ex: marpriori'
                             })
                         ),
-                        React.createElement(
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'button',
                             { type: 'submit', className: 'btn btn-primary' },
                             'Buscar'
@@ -11149,9 +11197,9 @@ var SearchUser = React.createClass({
             )
         );
     }
-});
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = SearchUser;
 
-module.exports = SearchUser;
 
 /***/ }),
 /* 110 */
@@ -25702,6 +25750,70 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
+
+
+/***/ }),
+/* 215 */,
+/* 216 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+class UserInfo extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+
+    render() {
+        if (this.props.user) {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                { className: "row" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "div",
+                    { className: "col-lg-4" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { className: "img-circle",
+                        src: this.props.user.avatar_url,
+                        alt: "avatar",
+                        width: "140",
+                        height: "140"
+                    }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "h2",
+                        null,
+                        this.props.user.login
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "p",
+                        null,
+                        this.props.user.name
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "p",
+                        null,
+                        "Followers: ",
+                        this.props.user.followers,
+                        " / Following: ",
+                        this.props.user.following
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "p",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "a",
+                            { className: "btn btn-default",
+                                href: this.props.user.html_url,
+                                role: "button" },
+                            "View details"
+                        )
+                    )
+                )
+            );
+        }
+        return null;
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = UserInfo;
 
 
 /***/ })

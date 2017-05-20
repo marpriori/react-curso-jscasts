@@ -1,42 +1,54 @@
-var React = require('react');
-var GitHubUser = require('../services/GitHubUser');
+import React, { Component } from 'react';
+import GitHubUser from '../services/GitHubUser';
 
-var SearchUser = React.createClass({
-    handleSubmit: function(e){
+export default class SearchUser extends React.Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: ''
+        };
+    }
+
+    handleUsernameChange(e) {
+        this.setState({ username: e.target.value });
+    }
+
+    handleSubmit(e) {
         e.preventDefault();
+        GitHubUser.getByUsername(this.state.username)
+            .then(function (response) {
+                this.props.updateUser(response.data);
+            }.bind(this));
+        GitHubUser.getReposByUsername(this.state.username)
+            .then(function (response) {
+                this.props.updateRepos(response.data);
+            }.bind(this));
+    }
 
-        GitHubUser.getByUsername(this.refs.username.value)
-            .then(function(response){
-                console.log(response);
-            });
-        GitHubUser.getReposByUsername(this.refs.username.value)
-            .then(function(response){
-                console.log(response);
-            });
-    },
-    render : function() {
-            return (
-                <div className="container">
-                    <div className="jumbotron">
-                        <h1>GitHub Info</h1>
-                        <div className="row">
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="form-group">
-                                    <label>Username</label>
-                                    <input 
-                                        type="text" 
-                                        ref="username"
-                                        className="form-control" 
-                                        placeholder="Ex: marpriori" 
-                                        />
-                                </div>
-                                <button type="submit" className="btn btn-primary">Buscar</button>
-                            </form>
-                        </div>
+    render() {
+        return (
+            <div className="container">
+                <div className="jumbotron">
+                    <h1>GitHub Info</h1>
+                    <div className="row">
+                        <form onSubmit={this.handleSubmit.bind(this)}>
+                            <div className="form-group">
+                                <label>Username</label>
+                                <input
+                                    type="text"
+                                    value={this.state.username}
+                                    onChange={this.handleUsernameChange.bind(this)}
+                                    className="form-control"
+                                    placeholder="Ex: marpriori"
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Buscar</button>
+                        </form>
                     </div>
                 </div>
-            );
-        }
-});
-
-module.exports = SearchUser;
+            </div>
+        );
+    }
+}
