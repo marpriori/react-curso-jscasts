@@ -25,7 +25,7 @@ const UserInfo = function (props) {
                     </p>
                 </div>
                 <div className="col-lg-8">
-                    <UserRepos repos={this.props.repos} />
+                    <UserRepos repos={props.repos} />
                 </div>
             </div>
         ) : null;

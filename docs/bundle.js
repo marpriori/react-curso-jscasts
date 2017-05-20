@@ -11826,7 +11826,7 @@ const UserInfo = function (props) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'col-lg-8' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__UserRepos__["a" /* default */], { repos: this.props.repos })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__UserRepos__["a" /* default */], { repos: props.repos })
         )
     ) : null;
 
