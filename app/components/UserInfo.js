@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UserRepos from './UserRepos';
 
 const UserInfo = function (props) {
     let userProp = props.user;
@@ -22,6 +23,9 @@ const UserInfo = function (props) {
                             role="button">View details
                             </a>
                     </p>
+                </div>
+                <div className="col-lg-8">
+                    <UserRepos repos={this.props.repos} />
                 </div>
             </div>
         ) : null;

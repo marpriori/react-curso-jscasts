@@ -54,6 +54,6 @@ export default class SearchUser extends React.Component {
     }
 }
 SearchUser.PropTypes = {
-    updateUser : PropTypes.func.isRequired,
-    updateRepos : PropTypes.func.isRequired,
+    updateUser: PropTypes.func.isRequired,
+    updateRepos: PropTypes.func.isRequired,
 }
