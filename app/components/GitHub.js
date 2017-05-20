@@ -10,7 +10,7 @@ export default class GitHub extends React.Component {
             repos: []
         };
     }
-    
+
     updateUser(user) {
         this.setState({ user: user });
     }

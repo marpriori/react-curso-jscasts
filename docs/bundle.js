@@ -11125,8 +11125,11 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__services_GitHubUser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_GitHubUser__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_GitHubUser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__services_GitHubUser__);
+
 
 
 
@@ -11145,10 +11148,10 @@ class SearchUser extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component
 
     handleSubmit(e) {
         e.preventDefault();
-        __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser___default.a.getByUsername(this.state.username).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_2__services_GitHubUser___default.a.getByUsername(this.state.username).then(function (response) {
             this.props.updateUser(response.data);
         }.bind(this));
-        __WEBPACK_IMPORTED_MODULE_1__services_GitHubUser___default.a.getReposByUsername(this.state.username).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_2__services_GitHubUser___default.a.getReposByUsername(this.state.username).then(function (response) {
             this.props.updateRepos(response.data);
         }.bind(this));
     }
@@ -11200,6 +11203,10 @@ class SearchUser extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = SearchUser;
 
+SearchUser.PropTypes = {
+    updateUser: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
+    updateRepos: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired
+};
 
 /***/ }),
 /* 110 */
@@ -11208,61 +11215,66 @@ class SearchUser extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 
 
-class UserInfo extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
-    render() {
-        if (this.props.user) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "row" },
+const UserInfo = function (props) {
+    let userProp = props.user;
+    let userInfo = userProp ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'row' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-lg-4' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'img-circle',
+                src: userProp.avatar_url,
+                alt: 'avatar',
+                width: '140',
+                height: '140'
+            }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'h2',
+                null,
+                userProp.login
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'p',
+                null,
+                userProp.name
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'p',
+                null,
+                'Followers: ',
+                userProp.followers,
+                ' / Following: ',
+                userProp.following
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'p',
+                null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "col-lg-4" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { className: "img-circle",
-                        src: this.props.user.avatar_url,
-                        alt: "avatar",
-                        width: "140",
-                        height: "140"
-                    }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "h2",
-                        null,
-                        this.props.user.login
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "p",
-                        null,
-                        this.props.user.name
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "p",
-                        null,
-                        "Followers: ",
-                        this.props.user.followers,
-                        " / Following: ",
-                        this.props.user.following
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "p",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "a",
-                            { className: "btn btn-default",
-                                href: this.props.user.html_url,
-                                role: "button" },
-                            "View details"
-                        )
-                    )
+                    'a',
+                    { className: 'btn btn-default',
+                        href: userProp.html_url,
+                        role: 'button' },
+                    'View details'
                 )
-            );
-        }
-        return null;
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = UserInfo;
+            )
+        )
+    ) : null;
 
+    return userInfo;
+};
+
+UserInfo.PropTypes = {
+    user: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
+    repos: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.array
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (UserInfo);
 
 /***/ }),
 /* 111 */
@@ -25814,6 +25826,109 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+
+
+var emptyFunction = __webpack_require__(10);
+var invariant = __webpack_require__(1);
+var ReactPropTypesSecret = __webpack_require__(62);
+
+module.exports = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
+    invariant(
+      false,
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+  };
+  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  };
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim
+  };
+
+  ReactPropTypes.checkPropTypes = emptyFunction;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(131)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(216)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })
 /******/ ]);

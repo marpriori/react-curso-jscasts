@@ -1,33 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class UserInfo extends React.Component {
-
-    render() {
-        if (this.props.user) {
-            return (
-                <div className="row">
-                    <div className="col-lg-4">
-                        <img className="img-circle"
-                            src={this.props.user.avatar_url}
-                            alt="avatar"
-                            width="140"
-                            height="140"
-                        />
-                        <h2>{this.props.user.login}</h2>
-                        <p>{this.props.user.name}</p>
-                        <p>Followers: {this.props.user.followers} / Following: {this.props.user.following}</p>
-                        <p>
-                            <a className="btn btn-default"
-                                href={this.props.user.html_url}
-                                role="button">View details
+const UserInfo = function (props) {
+    let userProp = props.user;
+    let userInfo = userProp ?
+        (
+            <div className="row">
+                <div className="col-lg-4">
+                    <img className="img-circle"
+                        src={userProp.avatar_url}
+                        alt="avatar"
+                        width="140"
+                        height="140"
+                    />
+                    <h2>{userProp.login}</h2>
+                    <p>{userProp.name}</p>
+                    <p>Followers: {userProp.followers} / Following: {userProp.following}</p>
+                    <p>
+                        <a className="btn btn-default"
+                            href={userProp.html_url}
+                            role="button">View details
                             </a>
-                        </p>
-
-                    </div>
+                    </p>
                 </div>
-            );
-        }
-        return (null);
-        
-    }
+            </div>
+        ) : null;
+
+    return userInfo;
 }
+
+UserInfo.PropTypes = {
+    user: PropTypes.object,
+    repos: PropTypes.array
+}
+
+export default UserInfo;
