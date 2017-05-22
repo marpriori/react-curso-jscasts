@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 export default class UserRepos extends React.Component {
 
     render() {
-        let repos = this.props.repos.map((repo, index) =>
+        const {repos} = this.props;
+        let reposList = repos.map((repo, index) =>
             <div key={index} className="thumbnail">
                 <div className="caption">
                     <h3>{repo.name + ' '}
@@ -21,8 +22,11 @@ export default class UserRepos extends React.Component {
                 </div>
             </div>
         );
-
-        return (<div>{repos}</div>);
+        return (
+            <div>
+                <h2>{repos.length} repositories</h2>
+                {reposList}
+            </div>);
 
     }
 }

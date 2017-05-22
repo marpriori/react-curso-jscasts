@@ -2,30 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import UserRepos from './UserRepos';
 
-const UserInfo = function (props) {
-    let userProp = props.user;
-    let userInfo = userProp ?
+const UserInfo = ({user, repos}) => {
+    let userInfo = user ?
         (
             <div className="row">
                 <div className="col-lg-4">
                     <img className="img-circle"
-                        src={userProp.avatar_url}
+                        src={user.avatar_url}
                         alt="avatar"
                         width="140"
                         height="140"
                     />
-                    <h2>{userProp.login}</h2>
-                    <p>{userProp.name}</p>
-                    <p>Followers: {userProp.followers} / Following: {userProp.following}</p>
+                    <h2>{user.login}</h2>
+                    <p>{user.name}</p>
+                    <p>Followers: {user.followers} / Following: {user.following}</p>
                     <p>
                         <a className="btn btn-default"
-                            href={userProp.html_url}
+                            href={user.html_url}
                             role="button">View details
                             </a>
                     </p>
                 </div>
                 <div className="col-lg-8">
-                    <UserRepos repos={props.repos} />
+                    <UserRepos repos={repos} />
                 </div>
             </div>
         ) : null;

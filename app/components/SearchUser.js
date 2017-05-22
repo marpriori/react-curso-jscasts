@@ -19,13 +19,13 @@ export default class SearchUser extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         GitHubUser.getByUsername(this.state.username)
-            .then(function (response) {
+            .then((response) => {
                 this.props.updateUser(response.data);
-            }.bind(this));
+            });
         GitHubUser.getReposByUsername(this.state.username)
-            .then(function (response) {
+            .then((response) => {
                 this.props.updateRepos(response.data);
-            }.bind(this));
+            });
     }
 
     render() {
